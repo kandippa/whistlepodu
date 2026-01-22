@@ -1,69 +1,21 @@
-N = 4
-
-ld = [0] * (2 * N - 1)  # Corrected size for diagonals
-
-rd = [0] * (2 * N - 1)
-
-cl = [0] * N
-
- 
-
-def printSolution(board):
-
-   for i in range(N):
-
-       for j in range(N):
-
-           print(" Q " if board[i][j] == 1 else " . ", end="")
-
-       print()
-
- 
-
-def solveNQUtil(board, col):
-
-   if col >= N:
-
+def minEatingSpeed(piles, H):
+   def can_eat_all_bananas(S):
+       hours = 0
+       for pile in piles:
+           hours += pile // S
+           if pile % S != 0:
+               hours += 1
+           if hours > H:
+               return False
        return True
-
-   for i in range(N):
-
-       # Check if the position is safe
-
-       if ld[i - col + N - 1] != 1 and rd[i + col] != 1 and cl[i] != 1:
-
-           board[i][col] = 1
-
-           ld[i - col + N - 1] = rd[i + col] = cl[i] = 1
-
-           if solveNQUtil(board, col + 1):
-
-               return True
-
-           board[i][col] = 0
-
-           ld[i - col + N - 1] = rd[i + col] = cl[i] = 0
-
-   return False
-
- 
-
-def solveNQ():
-
-   board = [[0 for _ in range(N)] for _ in range(N)]
-
-   if not solveNQUtil(board, 0):
-
-       print("Solution does not exist")
-
-       return False
-
-   printSolution(board)
-
-   return True
-
- 
-
-if __name__ == "__main__":
-
-   solveNQ()
+   left, right = max(piles), sum(piles)
+   while left < right:
+       mid = (left + right) // 2
+       if can_eat_all_bananas(mid):
+           right = mid
+       else:
+           left = mid + 1
+   return left
+piles = [3, 6, 7, 11]
+H = 8
+print(minEatingSpeed(piles, H))
