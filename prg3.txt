@@ -1,0 +1,65 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\b\fs16\fsmilli8040 \cf2 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"\
+    xmlns:tools="http://schemas.android.com/tools"\
+    android:layout_width="match_parent"\
+    android:layout_height="match_parent"\
+    android:paddingBottom="@dimen/activity_vertical_margin"\
+    android:paddingLeft="@dimen/activity_horizontal_margin"\
+    android:paddingRight="@dimen/activity_horizontal_margin"\
+    android:paddingTop="@dimen/activity_vertical_margin"\
+    tools:context=".MainActivity">\
+\
+    <Button\
+        android:id="@+id/btnShowDialog"\
+        android:layout_width="wrap_content"\
+        android:layout_height="wrap_content"\
+        android:layout_alignParentTop="true"\
+        android:layout_centerHorizontal="true"\
+        android:layout_marginTop="134dp"\
+        android:text="Show Alert Dialog" />\
+\
+</RelativeLayout>\
+\
+package com.example.pro3;\
+\
+import android.app.Activity;\
+import android.app.AlertDialog;\
+import android.content.DialogInterface;\
+import android.os.Bundle;\
+import android.view.View;\
+import android.widget.Button;\
+\
+public class MainActivity extends Activity \{\
+    @Override\
+    protected void onCreate(Bundle savedInstanceState) \{\
+        super.onCreate(savedInstanceState);\
+        setContentView(R.layout.activity_main);\
+\
+        Button btnShow = findViewById(R.id.btnShowDialog);\
+\
+        btnShow.setOnClickListener(new View.OnClickListener() \{\
+            @Override\
+            public void onClick(View v) \{\
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);\
+                builder.setTitle("Alert");\
+                builder.setMessage("This is a simple alert dialog.");\
+\
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() \{\
+                    @Override\
+                    public void onClick(DialogInterface dialog, int id) \{\
+                        dialog.dismiss(); // Closes dialog\
+                    \}\
+                \});\
+\
+                AlertDialog dialog = builder.create();\
+                dialog.show();\
+            \}\
+        \});\
+    \}\
+\}}
